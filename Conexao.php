@@ -1,6 +1,6 @@
 <?php
 require_once 'EnvLoader.php';
-EnvLoader::carregar(__DIR__ . '/../var/.env');
+EnvLoader::carregar(__DIR__ . '/.env');
 ;
 class Conexao {
     private static ?Conexao $instance = null;
@@ -12,7 +12,6 @@ class Conexao {
     private string $pass;
 
     private function __construct() {
-        var_dump($_ENV);
         $this->host = $_ENV['DB_HOST'];
         $this->dbname = $_ENV['DB_NAME'];
         $this->user = $_ENV['DB_USER'];

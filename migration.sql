@@ -5,17 +5,18 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE `captador` (
-  `id_captador` int NOT NULL,
+  `id_captador` int NOT NULL AUTO_INCREMENT,
   `nome_captador` varchar(50) DEFAULT NULL,
   `contato` varchar(45) DEFAULT NULL,
   `ativo` tinyint DEFAULT NULL,
   `empresa` varchar(20) NOT NULL,
-  `categoria` int NOT NULL
+  `categoria` int NOT NULL,
+  PRIMARY KEY (`id_captador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
 CREATE TABLE `clientes` (
-  `id_clientes` int NOT NULL,
+  `id_clientes` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) DEFAULT NULL,
   `sobrenome` varchar(100) DEFAULT NULL,
   `data_nascimento` date DEFAULT NULL,
@@ -24,13 +25,15 @@ CREATE TABLE `clientes` (
   `email` varchar(45) DEFAULT NULL,
   `Sexo_id_Sexo` int NOT NULL,
   `resp_atend` int NOT NULL,
-  `heat` int NOT NULL
+  `heat` int NOT NULL,
+  PRIMARY KEY (`id_clientes`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
 CREATE TABLE `combustivel` (
-  `id_combustivel` int NOT NULL,
-  `combustivel` varchar(45) DEFAULT NULL
+  `id_combustivel` int NOT NULL AUTO_INCREMENT,
+  `combustivel` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_combustivel`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -40,16 +43,17 @@ INSERT INTO `combustivel` (`id_combustivel`, `combustivel`) VALUES
 
 
 CREATE TABLE `email` (
-  `idEmail` int NOT NULL,
+  `idEmail` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
   `contato` varchar(45) DEFAULT NULL,
   `data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
-  `email` varchar(45) DEFAULT NULL
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idEmail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `embarcacao` (
-  `id_embarcacao` int NOT NULL,
+  `id_embarcacao` int NOT NULL AUTO_INCREMENT,
   `horas` int DEFAULT NULL,
   `potencia` int DEFAULT NULL,
   `quant_motor` int DEFAULT NULL,
@@ -69,15 +73,17 @@ CREATE TABLE `embarcacao` (
   `valor` double(20,2) NOT NULL,
   `sendEmail` tinyint NOT NULL,
   `propulsor` int DEFAULT NULL,
-  `marina_Marina` int NOT NULL
+  `marina_Marina` int NOT NULL,
+  PRIMARY KEY (`id_embarcacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
 
 CREATE TABLE `estados` (
-  `id_estados` int NOT NULL,
+  `id_estados` int NOT NULL AUTO_INCREMENT,
   `sigla` varchar(45) DEFAULT NULL,
-  `descricao` varchar(30) NOT NULL
+  `descricao` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_estados`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -113,8 +119,9 @@ INSERT INTO `estados` (`id_estados`, `sigla`, `descricao`) VALUES
 
 
 CREATE TABLE `fabricantes` (
-  `id_fabricantes` int NOT NULL,
-  `fabricante` varchar(40) DEFAULT NULL
+  `id_fabricantes` int NOT NULL AUTO_INCREMENT,
+  `fabricante` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id_fabricantes`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -178,11 +185,12 @@ INSERT INTO `fabricantes` (`id_fabricantes`, `fabricante`) VALUES
 
 
 CREATE TABLE `marina` (
-  `id_marina` int NOT NULL,
+  `id_marina` int NOT NULL AUTO_INCREMENT,
   `cidade` varchar(45) DEFAULT NULL,
   `contato` varchar(45) DEFAULT NULL,
   `Estados_id_estados` int NOT NULL,
-  `nome` varchar(20) NOT NULL
+  `nome` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_marina`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -212,15 +220,16 @@ INSERT INTO `marina` (`id_marina`, `cidade`, `contato`, `Estados_id_estados`, `n
 
 
 CREATE TABLE `marinheiro` (
-  `id_marinheiro` int NOT NULL,
+  `id_marinheiro` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(45) DEFAULT NULL,
-  `contato` varchar(45) DEFAULT NULL
+  `contato` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_marinheiro`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
 
 CREATE TABLE `procuras` (
-  `id_procuras` int NOT NULL,
+  `id_procuras` int NOT NULL AUTO_INCREMENT,
   `modelo` varchar(45) DEFAULT NULL,
   `horas` int DEFAULT NULL,
   `potencia` int DEFAULT NULL,
@@ -235,14 +244,16 @@ CREATE TABLE `procuras` (
   `p_tipo` int DEFAULT NULL,
   `quant_motores` int DEFAULT NULL,
   `valor` varchar(100) NOT NULL,
-  `propulsor` int NOT NULL
+  `propulsor` int NOT NULL,
+  PRIMARY KEY (`id_procuras`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
 
 CREATE TABLE `propulsor` (
-  `id_propulsor` int NOT NULL,
-  `modelopropulsor` varchar(50) DEFAULT NULL
+  `id_propulsor` int NOT NULL AUTO_INCREMENT,
+  `modelopropulsor` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_propulsor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -255,8 +266,9 @@ INSERT INTO `propulsor` (`id_propulsor`, `modelopropulsor`) VALUES
 
 
 CREATE TABLE `sexo` (
-  `id_Sexo` int NOT NULL,
-  `sexo` varchar(45) DEFAULT NULL
+  `id_Sexo` int NOT NULL AUTO_INCREMENT,
+  `sexo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_Sexo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -266,19 +278,21 @@ INSERT INTO `sexo` (`id_Sexo`, `sexo`) VALUES
 
 
 CREATE TABLE `tb_historico` (
-  `id_historico` int NOT NULL,
+  `id_historico` int NOT NULL AUTO_INCREMENT,
   `id_usuario` int NOT NULL,
   `data_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `historico` varchar(1500) NOT NULL,
   `ocorrencia` varchar(100) NOT NULL,
-  `id_cliente` int NOT NULL
+  `id_cliente` int NOT NULL,
+  PRIMARY KEY (`id_historico`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
 CREATE TABLE `tipo` (
-  `id_tipo` int NOT NULL,
-  `tipo` varchar(45) DEFAULT NULL
+  `id_tipo` int NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_tipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -290,8 +304,9 @@ INSERT INTO `tipo` (`id_tipo`, `tipo`) VALUES
 
 
 CREATE TABLE `tipousuario` (
-  `id_tipo_usuario` int NOT NULL,
-  `tipo_tp` varchar(45) DEFAULT NULL
+  `id_tipo_usuario` int NOT NULL AUTO_INCREMENT,
+  `tipo_tp` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_tipo_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 
@@ -303,20 +318,22 @@ INSERT INTO `tipousuario` (`id_tipo_usuario`, `tipo_tp`) VALUES
 
 
 CREATE TABLE `token` (
-  `id_token` int NOT NULL,
+  `id_token` int NOT NULL AUTO_INCREMENT,
   `token` varchar(800) NOT NULL,
   `id_seller` int NOT NULL,
-  `client_secret` varchar(500) NOT NULL
+  `client_secret` varchar(500) NOT NULL,
+  PRIMARY KEY (`id_token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE `usuario` (
-  `id_usuario` int NOT NULL,
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
   `cpf` varchar(20) DEFAULT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `senha` varchar(80) DEFAULT NULL,
   `TipoUsuario_id_tipo_usuario` int NOT NULL,
-  `reg_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `reg_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 

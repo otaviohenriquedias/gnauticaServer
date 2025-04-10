@@ -42,10 +42,6 @@ session_start();
             return $this->$name;
         }
 
-        private function updateSrcImg ($caminho, $id){
-            $stmt = $this->conexao->prepare('UPDATE embarcacao SET caminho_imagem = "'.$caminho.'" WHERE id_embarcacao = "'.strval($id).'"');
-            $stmt->execute();
-        }
         public function cadastrarEmb() {
     try {
         // Inicia a transação para garantir que tudo seja salvo corretamente
@@ -53,12 +49,12 @@ session_start();
 
         $query = '
             INSERT INTO embarcacao (
-                horas, potencia, quant_motor, modelo_motor, ano, caminho_imagem, 
+                horas, potencia, quant_motor, modelo_motor, ano, 
                 descricao, vendido, Fabricantes_id_fabricantes, Tipo_id_tipo, modelo, 
                 Clientes_id_clientes, Captador_id_captador, Combustivel_id_combustivel, 
                 offmarket, tamanho, valor, propulsor, marina_Marina
             ) VALUES (
-                :horas, :potencia, :quant_motor, :modelo_motor, :ano, :caminho_imagem, 
+                :horas, :potencia, :quant_motor, :modelo_motor, :ano, 
                 :descricao, :vendido, :fabricante, :tipo, :modelo, :cliente, 
                 :captador, :combustivel, :offmarket, :tamanho, :preco, :propulsor, :marina
             )';
@@ -90,7 +86,6 @@ session_start();
         $stmt->bindParam(':quant_motor', $quant_motor);
         $stmt->bindParam(':modelo_motor', $modelo_motor);
         $stmt->bindParam(':ano', $ano);
-        $stmt->bindParam(':caminho_imagem', $caminho_imagem);
         $stmt->bindParam(':descricao', $descricao);
         $stmt->bindParam(':vendido', $vendido, PDO::PARAM_BOOL);
         $stmt->bindParam(':fabricante', $fabricante);

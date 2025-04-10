@@ -1,4 +1,5 @@
 <?php
+require 'utils/DataHelper.php';
 session_start();
     class Cliente {
         private $id_cliente;
@@ -53,6 +54,8 @@ session_start();
             $stmt->bindValue(':contato', $celular);
             if($stmt->execute()){
                 $retorno = $stmt->fetchAll(PDO::FETCH_OBJ);
+                $stmt->closeCursor();
+
                 if (empty($retorno)){
                     return true;
                 }
@@ -65,7 +68,6 @@ session_start();
             $this->conexao->beginTransaction();
             $query = 
             '
-            SET FOREIGN_KEY_CHECKS = 0;
             INSERT INTO clientes(nome, sobrenome, data_nascimento, contato, email, Sexo_id_Sexo, resp_atend, heat) 
             VALUES (:nome, :sobrenome, :data_nascimento, :contato, :email, :sexo, 3, 1)
             ';
@@ -73,6 +75,7 @@ session_start();
                 $stmt = $this->conexao->prepare($query);
                 $stmt->bindValue(':nome', $this->nome);
                 $stmt->bindValue(':sobrenome', $this->sobrenome);
+                $this->data_nascimento = DataHelper::formatarParaMysql($this->data_nascimento);
                 $stmt->bindValue(':data_nascimento', $this->converteData($this->data_nascimento));
                 $stmt->bindValue(':contato', $this->contato);
                 $stmt->bindValue(':email', $this->email);
@@ -227,7 +230,6 @@ session_start();
                 $query =
     
                 '
-                SET FOREIGN_KEY_CHECKS=0;
                 UPDATE 
                     clientes
                  SET
@@ -241,6 +243,7 @@ session_start();
                  try {
                     $stmt = $this->conexao->prepare($query);
                     $stmt->bindValue(':nome', $this->nome);
+                    $this->data_nascimento = DataHelper::formatarParaMysql($this->data_nascimento);
                     $stmt->bindValue(':data', $this->data_nascimento);
                     $stmt->bindValue(':contato', $this->contato);
                     $stmt->bindValue(':email', $this->email);
@@ -250,6 +253,7 @@ session_start();
                     $stmt->bindValue(':heat', $this->heat);
                     $stmt->bindValue(':id', $id);
                     if($stmt->execute()){
+                        $stmt->closeCursor();
                         $this->conexao->commit();
                         echo '{"status":"Atualizado!", "mensagem" : "Cliente atualizado com sucesso!", "type" : "success"}';
                     }
